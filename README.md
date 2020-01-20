@@ -18,6 +18,8 @@ It will (probably) have:
 Open to suggestions and contributions, all help is appreciated!
 
 ## How To Build
+[Install Bazel](https://docs.bazel.build/versions/2.0.0/install.html)
+
 Download all files and navigate to the project root. From there execute the following console command:
 
 `$ bazel build ...`
