@@ -16,3 +16,14 @@ It will (probably) have:
 - Automatic builds and tests through Bazel
 
 Open to suggestions and contributions, all help is appreciated!
+
+## How To Build
+Download all files and navigate to the project root. From there execute the following console command:
+
+`$ bazel build ...`
+
+And this generates an output file which can be opened with this console command:
+
+`$ bazel-bin/src/main/totum`
+
+The result should come up in the terminal window
