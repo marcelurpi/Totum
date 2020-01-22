@@ -1,16 +1,9 @@
 #ifndef LIB_ENTITY_H_
 #define LIB_ENTITY_H_
 
-#include <string>
-#include <vector>
 #include "growthComponent.h"
 #include "hungerComponent.h"
-
-struct EntityType
-{
-    std::string name;
-    std::vector<std::pair<std::string, int>> components;
-};
+#include "entityType.h"
 
 class Entity : public std::enable_shared_from_this<Entity>
 {

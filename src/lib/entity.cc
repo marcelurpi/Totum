@@ -10,18 +10,19 @@ std::shared_ptr<Entity> Entity::create(const EntityType& entityType)
 
 void Entity::setComponents(const EntityType& entityType)
 {
-    components = std::vector<std::shared_ptr<Component>>(entityType.components.size());
+    auto typeComponents = entityType.getComponents();
+    components = std::vector<std::shared_ptr<Component>>(typeComponents.size());
     for(size_t i = 0; i < components.size(); ++i)
     {
-        if(entityType.components[i].first == "Growth")
+        if(typeComponents[i].first == "Growth")
         {
             components[i] = std::make_shared<GrowthComponent>(
-                entityType.components[i].second, shared_from_this());
+                typeComponents[i].second, shared_from_this());
         }
-        else if(entityType.components[i].first == "Hunger")
+        else if(typeComponents[i].first == "Hunger")
         {
             components[i] = std::make_shared<HungerComponent>(
-                entityType.components[i].second, shared_from_this());
+                typeComponents[i].second, shared_from_this());
         }
     }
 }
@@ -46,5 +47,5 @@ std::vector<std::shared_ptr<Component>> Entity::getComponents()
 
 std::string Entity::getName() const
 {
-    return entityType.name;
+    return entityType.getName();
 }
