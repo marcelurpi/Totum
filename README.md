@@ -29,3 +29,7 @@ And this generates an output file which can be opened with this console command:
 `$ bazel-bin/src/main/totum`
 
 The result should come up in the terminal window
+
+## Current Tasks and Roadmap
+
+Check out [Totum's Trello Board](https://trello.com/b/5hCbMPRM/totum) which contains all finished, in progress and planned versions, the tasks currently being worked on and much more
