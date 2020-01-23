@@ -9,10 +9,15 @@ int main()
 
     auto manager = EntityManager::getInstance();
 
-    EntityType grassType{"Grass", {}};
+    EntityType grassType("Grass");
+    grassType.addComponent<GrowthComponent>(20);
 
-    auto entity = manager->createEntity(grassType);
-    entity->addComponent<GrowthComponent>(20);
+    EntityType sheepType("Sheep");
+    sheepType.addComponent<GrowthComponent>(15);
+    sheepType.addComponent<HungerComponent>(20);
+
+    manager->createEntities(grassType, 4);
+    manager->createEntity(sheepType);
 
     while(true)
     {

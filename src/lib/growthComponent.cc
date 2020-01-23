@@ -1,12 +1,19 @@
 #include "growthComponent.h"
 #include "src/lib/entityManager.h"
 
-GrowthComponent::GrowthComponent(int valueToAddOnUpdate, std::shared_ptr<Entity> entity) :
-    Component("Growth", valueToAddOnUpdate, entity), valueToSpread(100) {}
+#include <iostream>
+
+GrowthComponent::GrowthComponent(int valueToAddOnUpdate) :
+    Component("Growth", valueToAddOnUpdate), valueToSpread(100) {}
 
 void GrowthComponent::update()
 {
     addGrowth(valueToAddOnUpdate);
+}
+
+std::shared_ptr<Component> GrowthComponent::clone()
+{
+    return std::make_shared<GrowthComponent>(*this);
 }
 
 void GrowthComponent::addGrowth(int amount)
@@ -24,6 +31,6 @@ void GrowthComponent::spread(int times) const
     auto manager = EntityManager::getInstance();
     for(int i = 0; i < times; ++i)
     {
-        manager->createEntity(entity->getEntityType());
+        manager->createEntity(parentEntity->getEntityType());
     }
 }

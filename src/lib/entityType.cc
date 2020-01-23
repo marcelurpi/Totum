@@ -1,9 +1,19 @@
 #include "entityType.h"
+#include "growthComponent.h"
+#include "hungerComponent.h"
 
-EntityType::EntityType(const std::string& name, std::vector<std::pair<std::string, int>> components) :
-    name(name), components(components) {}
+EntityType::EntityType(const std::string& name) : name(name) {}
 
-std::vector<std::pair<std::string, int>> EntityType::getComponents() const
+template<typename T>
+void EntityType::addComponent(int valueToAddOnUpdate)
+{
+    components.push_back(std::make_shared<T>(valueToAddOnUpdate));
+}
+
+template void EntityType::addComponent<GrowthComponent>(int valueToAddOnUpdate);
+template void EntityType::addComponent<HungerComponent>(int valueToAddOnUpdate);
+
+std::vector<std::shared_ptr<Component>> EntityType::getComponents() const
 {
     return components;
 }

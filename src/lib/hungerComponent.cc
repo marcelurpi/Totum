@@ -3,12 +3,17 @@
 
 #include <iostream>
 
-HungerComponent::HungerComponent(int valueToAddOnUpdate, std::shared_ptr<Entity> entity) :
-    Component("Hunger", valueToAddOnUpdate, entity), valueToEat(50), valueToStarve(100) {}
+HungerComponent::HungerComponent(int valueToAddOnUpdate) :
+    Component("Hunger", valueToAddOnUpdate), valueToEat(50), valueToStarve(100) {}
 
 void HungerComponent::update()
 {
     addHunger(valueToAddOnUpdate);
+}
+
+std::shared_ptr<Component> HungerComponent::clone()
+{
+    return std::make_shared<HungerComponent>(*this);
 }
 
 void HungerComponent::addHunger(int amount)
@@ -21,7 +26,6 @@ void HungerComponent::addHunger(int amount)
 void HungerComponent::eat(int amount)
 {
     auto manager = EntityManager::getInstance();
-    auto components = entity->getComponents();
     for(int i = 0; i < amount; ++i)
     {
         auto entityToEat = manager->getEntityByName("Grass");
@@ -35,6 +39,6 @@ void HungerComponent::eat(int amount)
 void HungerComponent::starve()
 {
     auto manager = EntityManager::getInstance();
-    std::shared_ptr<Entity> parent = std::shared_ptr<Entity>(entity);
+    std::shared_ptr<Entity> parent = std::shared_ptr<Entity>(parentEntity);
     manager->destroyEntity(parent);
 }

@@ -11,7 +11,7 @@ private:
     EntityType entityType;
     std::vector<std::shared_ptr<Component>> components;
 
-    Entity() = default;
+    Entity(EntityType entityType);
 public:
     static std::shared_ptr<Entity> create(const EntityType& entityType);
     void setComponents(const EntityType& entityType);

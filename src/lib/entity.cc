@@ -1,9 +1,10 @@
 #include "entity.h"
 
+Entity::Entity(EntityType entityType) : entityType(entityType) {}
+
 std::shared_ptr<Entity> Entity::create(const EntityType& entityType)
 {
-    auto entity = std::shared_ptr<Entity>(new Entity);
-    entity->entityType = entityType;
+    auto entity = std::shared_ptr<Entity>(new Entity(entityType));
     entity->setComponents(entityType);
     return entity;
 }
@@ -12,18 +13,11 @@ void Entity::setComponents(const EntityType& entityType)
 {
     auto typeComponents = entityType.getComponents();
     components = std::vector<std::shared_ptr<Component>>(typeComponents.size());
-    for(size_t i = 0; i < components.size(); ++i)
+    // Maybe use <algorithm>'s transform with two ranges?
+    for(size_t i = 0; i < typeComponents.size(); ++i)
     {
-        if(typeComponents[i].first == "Growth")
-        {
-            components[i] = std::make_shared<GrowthComponent>(
-                typeComponents[i].second, shared_from_this());
-        }
-        else if(typeComponents[i].first == "Hunger")
-        {
-            components[i] = std::make_shared<HungerComponent>(
-                typeComponents[i].second, shared_from_this());
-        }
+        components[i] = typeComponents[i]->clone();
+        components[i]->setParentEntity(shared_from_this());
     }
 }
 
@@ -38,7 +32,8 @@ void Entity::update()
 template<typename T>
 std::shared_ptr<T> Entity::addComponent(int valueToAddOnUpdate)
 {
-    std::shared_ptr<T> component = std::make_shared<T>(valueToAddOnUpdate, shared_from_this());
+    std::shared_ptr<T> component = std::make_shared<T>(valueToAddOnUpdate);
+    component->setParentEntity(shared_from_this());
     components.push_back(component);
     return component;
 }

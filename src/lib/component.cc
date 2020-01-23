@@ -1,9 +1,12 @@
 #include "component.h"
 
-Component::Component(const std::string& type, int valueToAddOnUpdate, std::shared_ptr<Entity> entity) :
-     type(type), value(0), valueToAddOnUpdate(valueToAddOnUpdate), entity(entity){}
+Component::Component(const std::string& type, int valueToAddOnUpdate) :
+     type(type), value(0), valueToAddOnUpdate(valueToAddOnUpdate) {}
 
-void Component::update() {}
+void Component::setParentEntity(std::shared_ptr<Entity> parentEntity)
+{
+    this->parentEntity = parentEntity;
+}
 
 std::string Component::getType() const
 {

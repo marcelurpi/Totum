@@ -11,8 +11,9 @@ private:
     int valueToEat;
     int valueToStarve;
 public:
-    HungerComponent(int valueToAddOnUpdate, std::shared_ptr<Entity> entity);
+    HungerComponent(int valueToAddOnUpdate);
     void update();
+    std::shared_ptr<Component> clone();
     void addHunger(int amount);
     void eat(int amount);
     void starve();

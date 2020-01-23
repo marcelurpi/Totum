@@ -10,8 +10,9 @@ class GrowthComponent : public Component
 private:
     int valueToSpread;
 public:
-    GrowthComponent(int valueToAddOnUpdate, std::shared_ptr<Entity> entity);
+    GrowthComponent(int valueToAddOnUpdate);
     void update();
+    std::shared_ptr<Component> clone();
     void addGrowth(int amount);
     void spread(int times) const;
 };

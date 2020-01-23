@@ -12,10 +12,12 @@ protected:
     std::string type;
     int value;
     int valueToAddOnUpdate;
-    std::shared_ptr<Entity> entity;
+    std::shared_ptr<Entity> parentEntity;
 public:
-    Component(const std::string& type, int valueToAddOnUpdate, std::shared_ptr<Entity> entity);
+    Component(const std::string& type, int valueToAddOnUpdate);
+    void setParentEntity(std::shared_ptr<Entity> entity);
     virtual void update() = 0;
+    virtual std::shared_ptr<Component> clone() = 0;
     std::string getType() const;
     int getValue() const;
 };
