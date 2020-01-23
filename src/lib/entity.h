@@ -16,6 +16,7 @@ public:
     static std::shared_ptr<Entity> create(const EntityType& entityType);
     void setComponents(const EntityType& entityType);
     void update();
+    template<typename T> std::shared_ptr<T> addComponent(int valueToAddOnUpdate);
     EntityType getEntityType() const;
     std::vector<std::shared_ptr<Component>> getComponents();
     std::string getName() const;

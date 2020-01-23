@@ -3,17 +3,16 @@
 
 int main()
 {
-    Logger logger(5);
+    Logger logger(1);
 
     logger.print_starting_line("0.1");
 
     auto manager = EntityManager::getInstance();
 
-    EntityType grassType{"Grass", {{"Growth", 10}}};
-    EntityType sheepType{"Sheep", {{"Growth", 10}, {"Hunger", 15}}};
+    EntityType grassType{"Grass", {}};
 
-    manager->createEntities(grassType, 10);
-    manager->createEntities(sheepType, 10);
+    auto entity = manager->createEntity(grassType);
+    entity->addComponent<GrowthComponent>(20);
 
     while(true)
     {

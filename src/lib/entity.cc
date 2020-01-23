@@ -35,6 +35,17 @@ void Entity::update()
     }
 }
 
+template<typename T>
+std::shared_ptr<T> Entity::addComponent(int valueToAddOnUpdate)
+{
+    std::shared_ptr<T> component = std::make_shared<T>(valueToAddOnUpdate, shared_from_this());
+    components.push_back(component);
+    return component;
+}
+
+template std::shared_ptr<GrowthComponent> Entity::addComponent<GrowthComponent>(int valueToAddOnUpdate);
+template std::shared_ptr<HungerComponent> Entity::addComponent<HungerComponent>(int valueToAddOnUpdate);
+
 EntityType Entity::getEntityType() const
 {
     return entityType;
