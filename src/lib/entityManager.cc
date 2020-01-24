@@ -44,3 +44,9 @@ std::shared_ptr<Entity> EntityManager::getEntityByName(const std::string& name)
     if(it == entities.end()) return nullptr;
     return *it;
 }
+
+std::shared_ptr<EntityManager> EntityManager::createEmptyInstance()
+{
+    instance = std::make_shared<EntityManager>();
+    return instance;
+}

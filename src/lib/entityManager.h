@@ -18,6 +18,9 @@ public:
     void createEntities(const EntityType& entityType, int amount);
     void destroyEntity(std::shared_ptr<Entity> toDestroy);
     std::shared_ptr<Entity> getEntityByName(const std::string& name);
+
+    // Used for testing
+    static std::shared_ptr<EntityManager> createEmptyInstance();
 };
 
 #endif
