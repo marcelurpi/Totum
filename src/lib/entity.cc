@@ -9,6 +9,7 @@ std::shared_ptr<Entity> Entity::create(const EntityType& entityType)
     return entity;
 }
 
+// This function exists to use safely use shared_from_this outside the constructor
 void Entity::setComponents(const EntityType& entityType)
 {
     auto typeComponents = entityType.getComponents();
@@ -54,4 +55,9 @@ std::vector<std::shared_ptr<Component>> Entity::getComponents()
 std::string Entity::getName() const
 {
     return entityType.getName();
+}
+
+void Entity::injectComponent(std::shared_ptr<Component> component)
+{
+    components.push_back(component);
 }
